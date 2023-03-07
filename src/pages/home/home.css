@@ -1,0 +1,137 @@
+.home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.homeContainer {
+  width: 100%;
+  margin-top: 1px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1510px;
+  background-color: #fff;
+}
+
+.homeTitle {
+  width: 1510px;
+  font-size: 20px;
+}
+
+.rightArea {
+  overflow: auto;
+  height: 1885px;
+  /* max-height: 100vh; */
+  background-color: #f0ebf8;
+  width: 553px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-tasks {
+  width: 100%;
+  padding-left: 60px;
+  color: #725798;
+}
+
+.two-halfs {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* left area */
+.expired {
+  margin-top: 49px;
+  width: 933px;
+  height: 579px;
+  background-color: #f0ebf8;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 28px rgba(218, 198, 245, 0.6);
+  /* align-items: center; */
+}
+
+.closeToExpired {
+  margin-top: 49px;
+  width: 933px;
+  height: 579px;
+  background-color: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 28px rgba(218, 198, 245, 0.6);
+  /* align-items: center; */
+}
+
+.whatIsNew {
+  margin-top: 49px;
+  width: 933px;
+  height: 579px;
+  background-color: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 28px rgba(218, 198, 245, 0.6);
+  /* align-items: center; */
+}
+
+.expired h1 {
+  color: #725798;
+  padding-left: 41px;
+  padding-top: 20px;
+}
+
+.closeToExpired h1 {
+  color: #725798;
+  padding-left: 41px;
+  padding-top: 20px;
+}
+
+.whatIsNew h1 {
+  color: #725798;
+  padding-left: 41px;
+  padding-top: 20px;
+}
+
+div.flexContainer {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+div.columns {
+  color: #725798;
+  font-size: 12px;
+}
+
+div.columns:nth-of-type(1) {
+  padding-left: 41px;
+  flex: 2.5;
+}
+
+div.columns:nth-of-type(2) {
+  flex: 1.7;
+}
+
+div.columns:nth-of-type(3) {
+  flex: 1.2;
+}
+
+div.columns:nth-of-type(4) {
+  flex: 1;
+}
+
+div.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+div.footer a {
+  text-decoration-line: underline;
+  font-size: 14px;
+  color: #686868;
+  padding-right: 44px;
+}

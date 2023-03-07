@@ -1,0 +1,22 @@
+.mt-3 {
+  margin-top: 3.5rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 1.25rem;
+}
+
+.compChart {
+  width: 59rem;
+  height: 384px;
+  /* position: relative; */
+
+  background: #ffffff;
+  box-shadow: 0px 4px 21px rgba(26, 26, 26, 0.16);
+  border-radius: 25px;
+  left: 189px;
+}
+
+.ant-progress-bg {
+  height: 4px !important;
+}

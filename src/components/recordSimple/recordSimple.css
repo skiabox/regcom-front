@@ -1,0 +1,30 @@
+.recordSimple {
+  margin-top: 24px;
+  width: 505px;
+  height: 181px;
+  background-color: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.recordSimpleTitle {
+  padding-top: 5px;
+  padding-left: 20px;
+  width: 80%;
+}
+
+.recordSimpleContent {
+  display: flex;
+}
+
+.recordSimpleContent > p {
+  width: 65%;
+  font-size: 14px;
+  padding-left: 22px;
+}
+
+.recordSimpleContent > span {
+  display: inline-flex;
+  align-self: flex-end;
+}

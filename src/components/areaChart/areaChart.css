@@ -1,0 +1,9 @@
+.area-chart {
+  margin: 10rem auto;
+  width: 40%;
+  background-color: "#522F91";
+}
+
+.area-chart .echarts-for-react canvas {
+  border-radius: 25px;
+}

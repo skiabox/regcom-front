@@ -1,0 +1,20 @@
+/* ------ css for the container ------ */
+.liquid-chart-container {
+  margin-top: 49px;
+  width: 505px;
+  height: 326px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.16);
+  border-radius: 24px;
+}
+
+.liquid-chart-container .component-title {
+  padding-left: 24px;
+  padding-top: 0px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  color: #725798;
+}
+/* ----------------------------------- */

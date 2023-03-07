@@ -1,0 +1,57 @@
+.record-complex-container {
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.13);
+  border-radius: 16px;
+  width: 853px;
+  height: 175px;
+  margin-bottom: 20px;
+}
+
+div.first-column {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  flex: 2.5;
+}
+
+div.first-column > h3 {
+  color: #725798;
+}
+
+div.first-column > p {
+  color: #333;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+div.second-column {
+  flex: 1.7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+div.third-column {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+div.third-column > span {
+  display: inline-block;
+  margin-left: -15px;
+}
+
+div.fourth-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainContent {
+  margin-left: 40px;
+}

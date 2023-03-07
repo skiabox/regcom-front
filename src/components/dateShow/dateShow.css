@@ -1,0 +1,10 @@
+.dateContainer {
+  display: flex;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+
+.dateContainer span {
+  font-size: 14px;
+  padding-left: 5px;
+}
