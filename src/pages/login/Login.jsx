@@ -1,72 +1,58 @@
-import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { useLogin } from "../../hooks/useLogin";
 import "./login.css";
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({
-    username: undefined,
-    passsword: undefined
-  });
-
-  const { user, loading, error, dispatch } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  //grab what we want from useLogin hook
+  const { login, error, isLoading } = useLogin();
 
   const navigate = useNavigate();
 
   //handlers
-  const handleChange = e => {
-    setCredentials(prev => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const handleClick = async e => {
+  const handleSubmit = async e => {
+    console.log("inside Login.jsx handleSubmit");
     e.preventDefault();
-    //just updates the loading state
-    dispatch({ type: "LOGIN_START" });
-    try {
-      const stringifiedCredentials = JSON.stringify(credentials);
-      const options = {
-        headers: { "content-type": "application/json" }
-      };
-      const res = await axios.post(
-        "/wp-json/jwt-auth/v1/token",
-        stringifiedCredentials,
-        options
-      );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      if (res.data.user_nicename === "stavros-kefaleas") {
-        navigate("/");
-      } else {
-        navigate("/homeDPO");
-      }
-    } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+
+    const res = await login(email, password);
+    console.log("res from login(email, password) in Login.jsx", res);
+    if (res.role === "editor") {
+      navigate("/editor");
     }
   };
 
   return (
-    <div className="login">
-      <div className="lContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <button disabled={loading} className="lButton" onClick={handleClick}>
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
-      </div>
-    </div>
+    <form className="login" onSubmit={handleSubmit}>
+      <p>Είσοδος Χρήστη</p>
+
+      <label id="labelEmail">Email</label>
+      <input
+        id="inputEmail"
+        type="email"
+        onChange={e => setEmail(e.target.value)}
+        value={email}
+        autoComplete="new-password"
+      />
+
+      <label id="labelPassword">Κωδικός Πρόσβασης</label>
+      <input
+        id="inputPassword"
+        type="password"
+        onChange={e => setPassword(e.target.value)}
+        value={password}
+        autoComplete="new-password"
+      />
+
+      <p id="forgotPassword">Ξέχασα τον κωδικό μου</p>
+
+      <label id="labelRememberMe">Να με θυμάσαι</label>
+      <input type="checkbox" id="rememberMe" />
+
+      <button disabled={isLoading}>Είσοδος</button>
+      {error && <div className="error">{error}</div>}
+    </form>
   );
 };
 

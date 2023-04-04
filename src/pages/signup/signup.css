@@ -1,4 +1,4 @@
-.login {
+.signup {
   position: relative;
   height: 562px;
   width: 556px;
@@ -12,33 +12,7 @@
   padding: 0;
 }
 
-.lContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.lInput {
-  height: 30px;
-  padding: 10px;
-}
-
-.lButton {
-  border: none;
-  padding: 10px 20px;
-  background-color: #0071c2;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.lButton:disabled {
-  background-color: #0071c28c;
-  cursor: not-allowed;
-}
-
-.login p {
+.signup p {
   position: absolute;
   color: #725798;
   left: 107px;
@@ -50,15 +24,16 @@
   margin: 0;
 }
 
-.login #labelEmail {
+.signup #labelEmail {
   position: absolute;
   left: 107px;
   top: 156px;
   font-size: 14px;
   font-weight: 400;
+  color: #344054;
 }
 
-.login #inputEmail {
+.signup #inputEmail {
   position: absolute;
   width: 338px;
   height: 40px;
@@ -74,15 +49,16 @@
   font-size: 20px;
 }
 
-.login #labelPassword {
+.signup #labelPassword {
   position: absolute;
   left: 107px;
   top: 250px;
   font-size: 14px;
   font-weight: 400;
+  color: #344054;
 }
 
-.login #inputPassword {
+.signup #inputPassword {
   position: absolute;
   width: 338px;
   height: 40px;
@@ -98,32 +74,24 @@
   font-size: 20px;
 }
 
-.login p#forgotPassword {
-  position: absolute;
-  left: 310px;
-  top: 330px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #725798;
-}
-
-.login input#rememberMe {
+.signup #labelRole {
   position: absolute;
   left: 107px;
-  top: 360px;
-}
-
-.login #labelRememberMe {
-  position: absolute;
-  left: 130px;
-  top: 361px;
+  top: 340px;
   font-size: 14px;
-  color: #373a3c;
+  font-weight: 400;
+  color: #344054;
 }
 
-.login button {
+.signup .react-select-signup {
   position: absolute;
-  top: 410px;
+  left: 107px;
+  top: 370px;
+}
+
+.signup button {
+  position: absolute;
+  top: 440px;
   width: 342px;
   height: 44px;
   background: #725798;

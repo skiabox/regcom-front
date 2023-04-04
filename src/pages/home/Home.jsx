@@ -12,7 +12,6 @@ import RecordComplex from "../../components/recordComplex/RecordComplex";
 const Home = () => {
   return (
     <div>
-      <Navbar />
       <div className="home">
         <div className="homeContainer">
           {/* <h1 className="homeTitle">This is the home page</h1>
@@ -20,13 +19,13 @@ const Home = () => {
           <div className="leftArea" flex={2}>
             <div className="expired">
               <h1>Expired</h1>
-              <div class="flexContainer">
-                <div class="columns">Compliance Obligation</div>
-                <div class="columns">Compliance Assessment</div>
-                <div class="columns">Due Date</div>
-                <div class="columns">Owner</div>
+              <div className="flexContainer">
+                <div className="columns">Compliance Obligation</div>
+                <div className="columns">Compliance Assessment</div>
+                <div className="columns">Due Date</div>
+                <div className="columns">Owner</div>
               </div>
-              <div class="mainContent">
+              <div className="mainContent">
                 <RecordComplex type="immediate" />
                 <RecordComplex type="immediate" />
               </div>
@@ -36,13 +35,13 @@ const Home = () => {
             </div>
             <div className="closeToExpired">
               <h1>Close to Expire</h1>
-              <div class="flexContainer">
-                <div class="columns">Compliance Obligation</div>
-                <div class="columns">Compliance Assessment</div>
-                <div class="columns">Due Date</div>
-                <div class="columns">Owner</div>
+              <div className="flexContainer">
+                <div className="columns">Compliance Obligation</div>
+                <div className="columns">Compliance Assessment</div>
+                <div className="columns">Due Date</div>
+                <div className="columns">Owner</div>
               </div>
-              <div class="mainContent">
+              <div className="mainContent">
                 <RecordComplex type="expire" />
                 <RecordComplex type="expire" />
               </div>
@@ -52,13 +51,13 @@ const Home = () => {
             </div>
             <div className="whatIsNew">
               <h1>What's New</h1>
-              <div class="flexContainer">
-                <div class="columns">Compliance Obligation</div>
-                <div class="columns">Compliance Assessment</div>
-                <div class="columns">Due Date</div>
-                <div class="columns">Owner</div>
+              <div className="flexContainer">
+                <div className="columns">Compliance Obligation</div>
+                <div className="columns">Compliance Assessment</div>
+                <div className="columns">Due Date</div>
+                <div className="columns">Owner</div>
               </div>
-              <div class="mainContent">
+              <div className="mainContent">
                 <RecordComplex type="default" />
                 <RecordComplex type="default" />
               </div>

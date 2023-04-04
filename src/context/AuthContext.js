@@ -1,66 +1,36 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
-const INITIAL_STATE = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
-  loading: false,
-  error: null
-};
+export const AuthContext = createContext();
 
-export const AuthContext = createContext(INITIAL_STATE);
-
-const AuthReducer = (state, action) => {
+export const authReducer = (state, action) => {
   switch (action.type) {
-    case "LOGIN_START":
-      return {
-        user: null,
-        loading: true,
-        error: null
-      };
-    case "LOGIN_SUCCESS":
-      console.log(
-        "Inside LOGIN_SUCCESS, user property of the state object",
-        action.payload
-      );
-      return {
-        user: action.payload,
-        loading: false,
-        error: null
-      };
-    case "LOGIN_FAILURE":
-      return {
-        user: null,
-        loading: false,
-        error: action.payload
-      };
+    case "LOGIN":
+      return { user: action.payload };
     case "LOGOUT":
-      return {
-        user: null,
-        loading: false,
-        error: null
-      };
+      return { user: null };
     default:
       return state;
   }
 };
 
-//children are the components that will use the state
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(authReducer, {
+    user: null
+  });
 
-  //use local storage evry time the user variable changes
+  //this is for the case of refreshing the page
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(state.user));
-  }, [state.user]);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      dispatch({ type: "LOGIN", payload: user });
+    }
+  }, []);
+
+  console.log("AuthContext state: ", state);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user: state.user,
-        loading: state.loading,
-        error: state.error,
-        dispatch
-      }}
-    >
+    <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );

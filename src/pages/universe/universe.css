@@ -1,0 +1,18 @@
+.universe-container {
+  width: 100%;
+  max-width: 1510px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.universe-sidebar {
+  flex: 1;
+  background-color: cyan;
+}
+
+.universe-content {
+  width: 700px;
+  height: 700px;
+  background-color: yellow;
+}

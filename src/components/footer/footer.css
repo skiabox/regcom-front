@@ -1,0 +1,18 @@
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1510px;
+  margin: 0 auto;
+}
+
+.footer-content hr {
+  max-width: 1510px;
+  width: 100%;
+}
+
+.footer-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
