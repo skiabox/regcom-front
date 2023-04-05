@@ -80,7 +80,7 @@ const ObligationDetails = ({ obligation }) => {
           }}
         >
           <Viewer
-            fileUrl={`http://localhost:4000/uploads/${obligation.pdfDocument}`}
+            fileUrl={`http://${process.env.REACT_APP_FILE_HOST}:4000/uploads/${obligation.pdfDocument}`}
           />
         </div>
       </Worker>
