@@ -10,10 +10,6 @@ import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
 
 const ObligationForm = () => {
-  //let arrayIndex = 0;
-  //const initialArrayValue = [];
-  //const reference = useRef(initialArrayValue);
-
   // create a ref for the file input
   const inputRef = useRef(null);
 
@@ -164,7 +160,7 @@ const ObligationForm = () => {
       setTitle("");
       setInForceDate(null);
       setApplyToAll(true);
-      setMainCategory(null);
+      setMainCategory(mainCategory);
       setSingleFile("");
       setError(null);
       setEmptyFields([]);
@@ -287,7 +283,7 @@ const ObligationForm = () => {
         </>
       )}
 
-      <input type="file" ref={inputRef} onChange={e => SingleFileChange(e)} />
+      <input type="file" ref={inputRef} onChange={SingleFileChange} />
       {/* <button type="button" onClick={() => uploadSingleFile()}>
         Upload
       </button> */}

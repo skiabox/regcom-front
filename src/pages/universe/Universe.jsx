@@ -78,7 +78,7 @@ const Universe = () => {
     console.log("INSIDE Universe.jsx - obligations7: ", obligations);
   }
 
-  const [current, setCurrent] = useState("mail");
+  const [current, setCurrent] = useState("default.pdf");
   const onClick = e => {
     console.log("click ", e);
     setCurrent(e.key);
