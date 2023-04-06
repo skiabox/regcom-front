@@ -23,7 +23,6 @@ const HomeDPO = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="home">
         <div className="homeContainer">
           {/* <h1 className="homeTitle">This is the home page</h1>

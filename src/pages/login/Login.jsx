@@ -20,6 +20,10 @@ const Login = () => {
     console.log("res from login(email, password) in Login.jsx", res);
     if (res.role === "editor") {
       navigate("/editor");
+    } else if (res.role === "simpleUser") {
+      navigate("/");
+    } else if (res.role === "dpoUser") {
+      navigate("/homeDPO");
     }
   };
 

@@ -1,9 +1,9 @@
 .navbar {
   height: 99px;
-  background-color: #F5F2EF;
+  background-color: #f5f2ef;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid #D5D0C9;
+  border-bottom: 1px solid #d5d0c9;
 }
 
 .navContainer {
@@ -14,8 +14,6 @@
   align-items: center;
   justify-content: space-between;
 }
-
-
 
 .logo {
   font-weight: 500;
@@ -31,7 +29,7 @@
 
 /* css for navbar */
 nav {
-  background-color: #F5F2EF;
+  background-color: #f5f2ef;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -51,15 +49,16 @@ nav li {
 }
 
 nav a {
-  color: #fff;
+  color: #333;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 nav a:hover {
-  color: #ddd;
+  color: #725798;
 }
 
 nav .active {
-  color: #ddd;
+  color: #725798;
+  font-weight: bold;
 }

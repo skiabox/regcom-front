@@ -11,31 +11,73 @@ const Navbar = ({ type }) => {
   const { logout } = useLogout();
   const { user } = useContext(AuthContext);
 
+  const handleClick = () => {
+    logout();
+  };
+
   return (
     <div className="navbar">
       <div className="navContainer">
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
           <GtRegComLogo />
         </Link>
-        {user ? (
+        {user?.role === "simpleUser" && (
           <nav>
             <ul>
               <li>
-                <NavLink exact="true" to="/">
+                <NavLink end to="/">
                   Home
                 </NavLink>
               </li>
               <li>
                 <NavLink to="my-tasks">My Tasks</NavLink>
               </li>
+              <li>
+                <NavLink to="/universe">Regulatory Universe</NavLink>
+              </li>
+              <li>
+                <Link onClick={handleClick}>Logout</Link>
+              </li>
             </ul>
             <UserAvatar />
           </nav>
-        ) : (
-          <div className="navItems">
-            <button className="navButton">Register</button>
-            <button className="navButton">Login</button>
-          </div>
+        )}
+        {user?.role === "dpoUser" && (
+          <nav>
+            <ul>
+              <li>
+                <NavLink end to="/homeDPO">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="my-tasks">My Tasks</NavLink>
+              </li>
+              <li>
+                <NavLink to="/universe">Regulatory Universe</NavLink>
+              </li>
+              <li>
+                <Link onClick={handleClick}>Logout</Link>
+              </li>
+            </ul>
+            <UserAvatar />
+          </nav>
+        )}
+        {user?.role === "editor" && (
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/editor">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/universe">Regulatory Universe</NavLink>
+              </li>
+              <li>
+                <Link onClick={handleClick}>Logout</Link>
+              </li>
+            </ul>
+            <UserAvatar />
+          </nav>
         )}
       </div>
     </div>

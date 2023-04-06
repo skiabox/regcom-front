@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./universe.css";
 import {
   AppstoreOutlined,
@@ -12,25 +12,19 @@ import { Viewer, Worker, SpecialZoomLevel } from "@react-pdf-viewer/core";
 // Import the styles for the pdf viewer
 // import "@react-pdf-viewer/core/lib/styles/index.css";
 
+import { useObligationsContext } from "../../hooks/useObligationsContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+
+const { SubMenu } = Menu;
+
+const AMLArray = [];
+
 const items = [
   {
     label: "AML",
     key: "aml",
     icon: <MailOutlined />,
-    children: [
-      {
-        label: "Aml Option 1",
-        key: "aml-option-1"
-      },
-      {
-        label: "Aml Option 2",
-        key: "aml-option-2"
-      },
-      {
-        label: "Aml Option 3",
-        key: "aml-option-3"
-      }
-    ]
+    children: AMLArray
   },
   {
     label: "SOX",
@@ -54,11 +48,68 @@ const items = [
 ];
 
 const Universe = () => {
+  const { obligations, dispatch } = useObligationsContext();
+  const [amlArray, setAmlArray] = useState([]);
+  const { user } = useAuthContext();
+  console.log("INSIDE Universe.jsx - user object: ", user);
+
+  useEffect(() => {
+    const fetchObligations = async () => {
+      const response = await fetch("/api/obligations", {
+        headers: {
+          // prettier-ignore
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      //convert again json array of objects to javascript array of objects
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_OBLIGATIONS", payload: json });
+      }
+    };
+
+    if (user) {
+      fetchObligations();
+    }
+  }, [dispatch, user]);
+
+  if (obligations) {
+    console.log("INSIDE Universe.jsx - obligations7: ", obligations);
+  }
+
   const [current, setCurrent] = useState("mail");
   const onClick = e => {
     console.log("click ", e);
     setCurrent(e.key);
   };
+
+  //chat gpt code
+  const renderMenuItems = data => {
+    return data.map((item, index) => {
+      return <Menu.Item key={item.pdfDocument}>{item.title}</Menu.Item>;
+    });
+  };
+
+  const renderSubMenu = () => {
+    const groupedData = obligations.reduce((groups, item) => {
+      const { mainCategory, title, pdfDocument } = item;
+      if (!groups[mainCategory]) {
+        groups[mainCategory] = [];
+      }
+      groups[mainCategory].push({ title, pdfDocument });
+      return groups;
+    }, {});
+
+    return Object.keys(groupedData).map(mainCategory => {
+      return (
+        <SubMenu key={mainCategory} title={mainCategory}>
+          {renderMenuItems(groupedData[mainCategory])}
+        </SubMenu>
+      );
+    });
+  };
+
   return (
     <div className="universe-container">
       <div className="universe-sidebar">
@@ -69,8 +120,9 @@ const Universe = () => {
             width: 256
           }}
           mode="inline"
-          items={items}
-        />
+        >
+          {renderSubMenu()}
+        </Menu>
       </div>
       <div className="universe-content">
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
@@ -82,7 +134,7 @@ const Universe = () => {
             }}
           >
             <Viewer
-              fileUrl={`http://localhost:4000/uploads/AML-Test-Law-1.pdf`}
+              fileUrl={`http://${process.env.REACT_APP_FILE_HOST}:4000/uploads/${current}`}
               defaultScale={SpecialZoomLevel.PageFit}
             />
           </div>

@@ -37,7 +37,21 @@ function App() {
               <Route
                 path="/"
                 element={
-                  user?.role === "dpoUser" ? <Home /> : <Navigate to="/login" />
+                  user?.role === "simpleUser" ? (
+                    <Home />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+              <Route
+                path="/homeDPO"
+                element={
+                  user?.role === "dpoUser" ? (
+                    <HomeDPO />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
                 }
               />
               <Route
@@ -48,9 +62,6 @@ function App() {
                 path="/signup"
                 element={!user ? <Signup /> : <Navigate to="/" />}
               />
-              {/* <Route path="/" element={<Home />} />
-              <Route path="/homeDPO" element={<HomeDPO />} />
-              <Route path="/login" element={<Login />} /> */}
             </Routes>
           </div>
           <Footer />
