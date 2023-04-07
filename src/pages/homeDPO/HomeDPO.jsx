@@ -12,7 +12,7 @@ import ComplianceCompany from "../../components/complianceCompany/ComplianceComp
 import ComplianceCategory from "../../components/complianceCategory/ComplianceCategory";
 import AreaChart from "../../components/areaChart/AreaChart";
 
-const HomeDPO = () => {
+const HomeDpoPage = () => {
   const progressData = [
     { value: 70, name: "Corporate Governance" },
     { value: 60, name: "GDPR" },
@@ -97,4 +97,4 @@ const HomeDPO = () => {
   );
 };
 
-export default HomeDPO;
+export default HomeDpoPage;

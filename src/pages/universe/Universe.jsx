@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./universe.css";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined
-} from "@ant-design/icons";
+import { HomeOutlined, BarChartOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 //pdf related imports
 import { Viewer, Worker, SpecialZoomLevel } from "@react-pdf-viewer/core";
@@ -15,42 +12,23 @@ import { Viewer, Worker, SpecialZoomLevel } from "@react-pdf-viewer/core";
 import { useObligationsContext } from "../../hooks/useObligationsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
+//search text box
+import { SearchOutlined } from "@ant-design/icons";
+import { Input } from "antd";
+import ColoredBulletLink from "../../components/shared/ColoredBulletLink";
+
+const prefix = <SearchOutlined style={{ fontSize: 24, color: "purple" }} />;
+
 const { SubMenu } = Menu;
 
-const AMLArray = [];
-
-const items = [
-  {
-    label: "AML",
-    key: "aml",
-    icon: <MailOutlined />,
-    children: AMLArray
-  },
-  {
-    label: "SOX",
-    key: "sox",
-    icon: <AppstoreOutlined />,
-    children: [
-      {
-        label: "Sox Option 1",
-        key: "sox-option-1"
-      },
-      {
-        label: "Sox Option 2",
-        key: "sox-option-2"
-      },
-      {
-        label: "Sox Option 3",
-        key: "sox-option-3"
-      }
-    ]
-  }
-];
+//handlers
+const onSearch = value => console.log(value);
 
 const Universe = () => {
   const { obligations, dispatch } = useObligationsContext();
   const [amlArray, setAmlArray] = useState([]);
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   console.log("INSIDE Universe.jsx - user object: ", user);
 
   useEffect(() => {
@@ -70,6 +48,7 @@ const Universe = () => {
     };
 
     if (user) {
+      console.log("--->INSIDE Universe.jsx - user object: ", user);
       fetchObligations();
     }
   }, [dispatch, user]);
@@ -103,7 +82,13 @@ const Universe = () => {
 
     return Object.keys(groupedData).map(mainCategory => {
       return (
-        <SubMenu key={mainCategory} title={mainCategory}>
+        <SubMenu
+          icon={
+            mainCategory === "AML" ? <HomeOutlined /> : <BarChartOutlined />
+          }
+          key={mainCategory}
+          title={mainCategory}
+        >
           {renderMenuItems(groupedData[mainCategory])}
         </SubMenu>
       );
@@ -117,7 +102,7 @@ const Universe = () => {
         <Menu
           onClick={onClick}
           style={{
-            width: 256
+            width: 315
           }}
           mode="inline"
         >
@@ -125,17 +110,49 @@ const Universe = () => {
         </Menu>
       </div>
       <div className="universe-content">
+        <Input
+          placeholder="Αναζήτηση"
+          allowClear
+          size="large"
+          prefix={prefix}
+          onSearch={onSearch}
+          style={{
+            margin: "10px auto",
+            width: "95%",
+            padding: "15px",
+            fontSize: "24px"
+          }}
+        />
+        <div id="universe-category-links">
+          <Link to="#test">
+            <ColoredBulletLink text="AML" />
+          </Link>
+          <Link to="#test">
+            <ColoredBulletLink text="Corporate Governance" />
+          </Link>
+          <Link to="#test">
+            <ColoredBulletLink text="GDPR" />
+          </Link>
+          <Link to="#test">
+            <ColoredBulletLink text="SOX" />
+          </Link>
+        </div>
+        <hr />
+        <div id="universe-document-details">
+          <strong>Law1</strong>
+          <p>In-Force Date 14-02-21 &emsp; Date of Last Update 15-10-2022</p>
+        </div>
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
           <div
             style={{
               border: "1px solid rgba(0, 0, 0, 0.3)",
               height: "700px",
-              width: "700px"
+              width: "100%"
             }}
           >
             <Viewer
               fileUrl={`http://${process.env.REACT_APP_FILE_HOST}:4000/uploads/${current}`}
-              defaultScale={SpecialZoomLevel.PageFit}
+              defaultScale={SpecialZoomLevel.PageWidth}
             />
           </div>
         </Worker>

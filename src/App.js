@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/home/Home";
-import HomeDPO from "./pages/homeDPO/HomeDPO";
+import HomePage from "./pages/home/Home";
+import HomeDpoPage from "./pages/homeDPO/HomeDPO";
 import Login from "./pages/login/Login";
 
 import { useAuthContext } from "./hooks/useAuthContext";
@@ -10,6 +10,7 @@ import "./App.css";
 import Signup from "./pages/signup/Signup";
 import Editor from "./pages/editor/Editor";
 import Universe from "./pages/universe/Universe";
+import DpoMyTasks from "./pages/dpo-my-tasks/DpoMyTasks";
 
 function App() {
   const { user } = useAuthContext();
@@ -23,7 +24,10 @@ function App() {
           <Navbar />
           <div className="pages">
             <Routes>
-              <Route path="/universe" element={<Universe />} />
+              <Route
+                path="/universe"
+                element={user ? <Universe /> : <Navigate to="/login" />}
+              />
               <Route
                 path="/editor"
                 element={
@@ -38,7 +42,7 @@ function App() {
                 path="/"
                 element={
                   user?.role === "simpleUser" ? (
-                    <Home />
+                    <HomePage />
                   ) : (
                     <Navigate to="/login" />
                   )
@@ -48,7 +52,17 @@ function App() {
                 path="/homeDPO"
                 element={
                   user?.role === "dpoUser" ? (
-                    <HomeDPO />
+                    <HomeDpoPage />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+              <Route
+                path="/dpoMyTasks"
+                element={
+                  user?.role === "dpoUser" ? (
+                    <DpoMyTasks />
                   ) : (
                     <Navigate to="/login" />
                   )

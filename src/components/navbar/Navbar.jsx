@@ -51,7 +51,7 @@ const Navbar = ({ type }) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="my-tasks">My Tasks</NavLink>
+                <NavLink to="/dpoMyTasks">My Tasks</NavLink>
               </li>
               <li>
                 <NavLink to="/universe">Regulatory Universe</NavLink>

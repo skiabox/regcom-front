@@ -8,8 +8,36 @@ import { ReactComponent as ErrorIcon } from "../../assets/error.svg";
 import { ReactComponent as GoodIcon } from "../../assets/good.svg";
 import LinkButton from "../../components/linkButton/LinkButton";
 import RecordComplex from "../../components/recordComplex/RecordComplex";
+import { useObligationsContext } from "../../hooks/useObligationsContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useEffect } from "react";
 
-const Home = () => {
+const HomePage = () => {
+  const { obligations, dispatch } = useObligationsContext();
+  const { user } = useAuthContext();
+  console.log("INSIDE Home.jsx", user);
+
+  useEffect(() => {
+    const fetchObligations = async () => {
+      const response = await fetch("/api/obligations", {
+        headers: {
+          // prettier-ignore
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      //convert again json array of objects to javascript array of objects
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_OBLIGATIONS", payload: json });
+      }
+    };
+
+    if (user) {
+      fetchObligations();
+    }
+  }, [dispatch, user]);
+
   return (
     <div>
       <div className="home">
@@ -97,4 +125,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
