@@ -11,6 +11,7 @@ import Signup from "./pages/signup/Signup";
 import Editor from "./pages/editor/Editor";
 import Universe from "./pages/universe/Universe";
 import DpoMyTasks from "./pages/dpo-my-tasks/DpoMyTasks";
+import EditorOrganizations from "./pages/editor-organizations/EditorOrganizations";
 
 function App() {
   const { user } = useAuthContext();
@@ -24,6 +25,12 @@ function App() {
           <Navbar />
           <div className="pages">
             <Routes>
+              <Route
+                path="/editor-organizations"
+                element={
+                  user ? <EditorOrganizations /> : <Navigate to="/login" />
+                }
+              />
               <Route
                 path="/universe"
                 element={user ? <Universe /> : <Navigate to="/login" />}

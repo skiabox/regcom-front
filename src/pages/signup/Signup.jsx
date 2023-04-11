@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../../hooks/useSignup";
 import "./signup.css";
 
 import Select from "react-select";
+import { useOrganizationsContext } from "../../hooks/useOrganizationsContext";
 
 const Signup = () => {
+  const { organizations, dispatch } = useOrganizationsContext();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [organization, setOrganization] = useState("");
 
   //react-select options
   const options = [
@@ -22,9 +26,41 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  //fetch organizations
+  useEffect(() => {
+    const fetchOrganizations = async () => {
+      const response = await fetch("/api/organizations");
+      //convert again json array of objects to javascript array of objects
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_ORGANIZATIONS", payload: json });
+      }
+    };
+
+    fetchOrganizations();
+  }, [dispatch]);
+
+  let organizationOptions = [];
+
+  if (organizations) {
+    // for each loop
+    for (let i = 0; i < organizations.length; i++) {
+      organizationOptions.push({
+        value: organizations[i].customerCode.toLowerCase(),
+        label: organizations[i].customerCode
+      });
+    }
+  }
+
   //react-select handler
   const handleChange = selectedOption => {
     setRole(selectedOption.value);
+    console.log(`Option selected:`, selectedOption);
+  };
+
+  const handleChangeOrganization = selectedOption => {
+    setOrganization(selectedOption.value);
     console.log(`Option selected:`, selectedOption);
   };
 
@@ -72,6 +108,23 @@ const Signup = () => {
         className="react-select-signup"
         options={options}
         onChange={handleChange}
+      />
+
+      <label id="labelOrganization">Οργανισμός</label>
+      <Select
+        styles={{
+          control: (baseStyles, state) => ({
+            ...baseStyles,
+            backgroundColor: "#fff",
+            border: "1px solid #D0D5DD",
+            boxShadow: "0px 1px 2px rgba(16, 24, 40, 0.05)",
+            borderRadius: "8px",
+            width: "200px"
+          })
+        }}
+        className="react-select-signup-organization"
+        options={organizationOptions}
+        onChange={handleChangeOrganization}
       />
 
       <button disabled={isLoading}>Εγγραφή</button>

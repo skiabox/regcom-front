@@ -28,7 +28,7 @@ const ObligationDetails = ({ obligation }) => {
         'Authorization': `Bearer ${user.token}`
       }
     });
-    //get the workout object from the back end
+    //get the obligation object from the back end
     const json = await response.json();
 
     if (response.ok) {

@@ -5,8 +5,8 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import "./editor.css";
 
 //Components
-import ObligationDetails from "../../components/editWorkouts/ObligationDetails";
-import ObligationForm from "../../components/editWorkouts/ObligationForm";
+import ObligationDetails from "../../components/editObligations/ObligationDetails";
+import ObligationForm from "../../components/editObligations/ObligationForm";
 
 const Editor = () => {
   const { obligations, dispatch } = useObligationsContext();

@@ -101,7 +101,7 @@ const ObligationForm = () => {
     resetFileInput();
 
     if (!user) {
-      setError("You need to be logged in to add a workout");
+      setError("You need to be logged in to add an obligation");
       return;
     }
 

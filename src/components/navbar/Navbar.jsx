@@ -70,6 +70,9 @@ const Navbar = ({ type }) => {
                 <NavLink to="/editor">Home</NavLink>
               </li>
               <li>
+                <NavLink to="/editor-organizations">Organizations</NavLink>
+              </li>
+              <li>
                 <NavLink to="/universe">Regulatory Universe</NavLink>
               </li>
               <li>
